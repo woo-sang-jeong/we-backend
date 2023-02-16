@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "we-backend"
+version = "0.1.0"
+description = "For Backend"
+authors = ["woo-sang-jeong <jeongwoosangdev@gmail.com>"]
+readme = "README.md"
+packages = [{include = "we_backend"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^4.1.7"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
