@@ -18,6 +18,7 @@ env = environ.Env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -33,19 +34,23 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-THIRD_PARTY_APPS = []
+THIRD_PARTY_APPS = [
+    "rest_framework",
+    "rest_framework_simplejwt",
+    "corsheaders",
+]
 
 CUSTOM_APPS = [
     "categories.apps.CategoriesConfig",
     "comment.apps.CommentConfig",
     "common.apps.CommonConfig",
-    "direct_messages.apps.Direct_messagesConfig",
-    "like_dislike.apps.Like_dislike",
+    "direct_messages.apps.DirectMessagesConfig",
     "medias.apps.MediasConfig",
-    "posts.apps.PostsConfig",
     "uploads.apps.UploadsConfig",
     "users.apps.UsersConfig",
+    "posts.apps.PostConfig",
 ]
+
 
 SYSTEM_APPS = [
     "django.contrib.admin",
@@ -66,6 +71,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -148,3 +154,11 @@ AUTH_USER_MODEL = "users.User"
 MEDIA_ROOT = "uploads"
 
 MEDIA_URL = "user-uploads/"
+
+REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 5,
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ],
+}

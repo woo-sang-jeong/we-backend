@@ -1,3 +1,6 @@
-from django.test import TestCase
+from rest_framework.test import APITestCase
 
-# Create your tests here.
+
+class TestUsers(APITestCase):
+    def test_plus(self):
+        self.assertEqual(2 + 2, 4, "wrong!")
