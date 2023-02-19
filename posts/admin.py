@@ -8,9 +8,10 @@ class PostAdmin(admin.ModelAdmin):
     list_display = (
         "title",
         "owner",
-        "like",
-        "dislike",
-        "create_at",
+        "category",
+        "p_like",
+        "p_dislike",
+        "created_at",
         "updated_at",
     )
 

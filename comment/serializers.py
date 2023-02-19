@@ -12,6 +12,6 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = (
             "user",
             "payload",
-            "like",
-            "dislike",
+            "c_like",
+            "c_dislike",
         )

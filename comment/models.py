@@ -17,5 +17,11 @@ class Comment(CommonModel):
         related_name="comments",
     )
     payload = models.TextField()
-    like = models.PositiveIntegerField()
-    dislike = models.PositiveIntegerField()
+    c_like = models.PositiveIntegerField(null=True, default="0")
+    c_dislike = models.PositiveIntegerField(null=True, default="0")
+
+    def like_count(self):
+        return Comment.c_like.count()
+
+    def dislike_count(self):
+        return Comment.c_dislike.count()

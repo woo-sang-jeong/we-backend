@@ -14,8 +14,8 @@ class PostDetailSerializer(serializers.ModelSerializer):
     category = CategorySerializer(
         read_only=True,
     )
-    like = serializers.SerializerMethodField()
-    dislike = serializers.SerializerMethodField()
+    # p_like = serializers.SerializerMethodField()
+    # p_dislike = serializers.SerializerMethodField()
     photos = PhotoSerializer(many=True, read_only=True)
 
     class Meta:
@@ -23,10 +23,10 @@ class PostDetailSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
     def get_like(self, post):
-        return post.like()
+        return post.p_like()
 
     def get_dislike(self, post):
-        return post.dislike()
+        return post.p_dislike()
 
     def get_is_owner(self, post):
         request = self.context.get("request")
@@ -36,7 +36,7 @@ class PostDetailSerializer(serializers.ModelSerializer):
 
 class PostListSerializer(serializers.ModelSerializer):
 
-    like = serializers.SerializerMethodField()
+    # p_like = serializers.SerializerMethodField()
     is_owner = serializers.SerializerMethodField()
     photos = PhotoSerializer(many=True, read_only=True)
 
@@ -45,17 +45,17 @@ class PostListSerializer(serializers.ModelSerializer):
         fields = (
             "pk",
             "title",
-            "like",
-            "dislike",
+            "p_like",
+            "p_dislike",
             "is_owner",
             "photos",
         )
 
     def get_like(self, post):
-        return post.like()
+        return post.p_like()
 
     def get_dislike(self, post):
-        return post.dislike()
+        return post.p_dislike()
 
     def get_is_owner(self, post):
         request = self.context["request"]

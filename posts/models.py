@@ -15,14 +15,20 @@ class Post(CommonModel):
         related_name="posts",
     )
     category = models.ForeignKey(
-        "categories.Category", null=True, blank=True, on_delete=models.SET_NULL
+        "categories.Category",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="posts",
     )
+    p_like = models.PositiveIntegerField(null=True, default="0")
+    p_dislike = models.PositiveIntegerField(null=True, default="0")
 
-    def __str__(post) -> str:
-        return post.title
+    def __str__(self) -> str:
+        return self.title
 
-    def like(post):
-        count = post.comment.count()
+    def like_count(post):
+        return Post.p_like.count()
 
-    def dislike(post):
-        count = post.comment.count()
+    def dislike_count(post):
+        return Post.p_dislike.comment.count()

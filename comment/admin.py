@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Comment
+from posts.models import Post
 
 
 class WordFilter(admin.SimpleListFilter):
@@ -27,14 +28,14 @@ class WordFilter(admin.SimpleListFilter):
 class CommentAdmin(admin.ModelAdmin):
 
     list_display = (
-        "__str__",
+        "post",
         "payload",
-        "like",
-        "dislike",
+        "c_like",
+        "c_dislike",
     )
     list_filter = (
         WordFilter,
-        "like",
-        "dislike",
+        "c_like",
+        "c_dislike",
         "post__category",
     )

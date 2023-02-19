@@ -13,7 +13,7 @@ class CustomUserAdmin(UserAdmin):
                     "avatar",
                     "username",
                     "password",
-                    "name",
+                    # "name",
                     "email",
                     "gender",
                 ),
@@ -45,5 +45,5 @@ class CustomUserAdmin(UserAdmin):
     list_display = (
         "username",
         "email",
-        "name",
+        # "name",
     )

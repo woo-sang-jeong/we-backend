@@ -11,14 +11,14 @@ class User(AbstractUser):
     login_id = models.CharField(
         max_length=30,
         editable=False,
-        unique=True,
     )
     avatar = models.URLField(blank=True)
+    """
     name = models.CharField(
         max_length=20,
         default="",
-        unique=True,
     )
+    """
     gender = models.CharField(
         max_length=10,
         choices=GenderChoices.choices,

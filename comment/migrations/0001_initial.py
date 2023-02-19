@@ -10,7 +10,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name="Category",
+            name="Comment",
             fields=[
                 (
                     "id",
@@ -23,10 +23,12 @@ class Migration(migrations.Migration):
                 ),
                 ("created_at", models.DateTimeField(auto_now_add=True)),
                 ("updated_at", models.DateTimeField(auto_now=True)),
-                ("name", models.CharField(max_length=50)),
+                ("payload", models.TextField()),
+                ("c_like", models.PositiveIntegerField(default="0", null=True)),
+                ("c_dislike", models.PositiveIntegerField(default="0", null=True)),
             ],
             options={
-                "verbose_name_plural": "Categories",
+                "abstract": False,
             },
         ),
     ]
