@@ -6,6 +6,7 @@ from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.exceptions import ParseError, NotFound
 from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.tokens import AccessToken
 from users.models import User
 from . import serializers
 
@@ -89,9 +90,11 @@ class Login(APIView):
             username=username,
             password=password,
         )
+        # 로그인 할 때 마다 token, 과 refresh token 재발급
+        # refresh = RefreshToken.for_user(user)
         if user:
             login(request, user)
-            return Response({"ok": "welcome!"})
+            return Response({"ok": "Welcome!"})
         else:
             return Response({"error": "wrong password"})
 
@@ -103,3 +106,21 @@ class LogOut(APIView):
     def post(self, request):
         logout(request)
         return Response({"ok": "bye!"})
+
+
+class JWTLogin(APIView):
+    def post(self, request):
+        username = request.data.get("username")
+        password = request.data.get("password")
+        if not username or not password:
+            raise ParseError
+        user = authenticate(
+            request,
+            username=username,
+            password=password,
+        )
+        if user:
+            token = AccessToken.for_user(user)
+            return Response({"token": str(token)})
+        else:
+            return Response({"error": "wrong password"})
