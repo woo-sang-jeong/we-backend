@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.views import APIView
@@ -105,7 +106,7 @@ class PostComments(APIView):
     def get(self, request, pk):
         post = self.get_object(pk)
         serializer = CommentSerializer(
-            post.comment.all(),
+            post.comments.all(),
             many=True,
         )
         return Response(serializer.data)
@@ -121,10 +122,25 @@ class PostComments(APIView):
             return Response(serializer.data)
 
     def put(self, request, pk):
-        pass
+        comment = get_object_or_404(pk=pk)
+        self.check_object_permissions(request, comment)
+        serializer = CommentSerializer(
+            comment,
+            data=request.data,
+            partial=True,
+        )
+        if serializer.is_valid():
+            comment = serializer.save()
+            serializer = CommentSerializer(comment)
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors)
 
     def delete(self, request, pk):
-        pass
+        comment = get_object_or_404(pk=pk)
+        self.check_object_permissions(request, comment)
+        comment.delete()
+        return Response({"message": "deleted successfully."})
 
 
 class PostPhotos(APIView):
