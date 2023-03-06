@@ -39,11 +39,15 @@ class PostListSerializer(serializers.ModelSerializer):
     # p_like = serializers.SerializerMethodField()
     is_owner = serializers.SerializerMethodField()
     photos = PhotoSerializer(many=True, read_only=True)
+    category = CategorySerializer(
+        read_only=True,
+    )
 
     class Meta:
         model = Post
         fields = (
             "pk",
+            "category",
             "title",
             "p_like",
             "p_dislike",

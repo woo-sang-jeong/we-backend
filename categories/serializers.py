@@ -8,4 +8,5 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = (
             "pk",
             "name",
+            "post",
         )

@@ -17,6 +17,7 @@ class PostAdmin(admin.ModelAdmin):
 
     list_filter = (
         "owner",
+        "category",
         "created_at",
         "updated_at",
     )
