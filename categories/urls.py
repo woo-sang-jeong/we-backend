@@ -12,12 +12,20 @@ urlpatterns = [
         ),
     ),
     path(
-        "<int:pk>",
+        "/<int:pk>",
         views.CategoryviewSet.as_view(
             {
-                "get": "retrive",
+                "get": "retrieve",
                 "put": "partial_update",
                 "delete": "destroy",
+            }
+        ),
+    ),
+    path(
+        "/<int:pk>/posts/",
+        views.CategoryviewSet.as_view(
+            {
+                "get": "get_posts_by_category",
             }
         ),
     ),
