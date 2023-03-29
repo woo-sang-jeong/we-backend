@@ -12,7 +12,7 @@ urlpatterns = [
         ),
     ),
     path(
-        "/<int:pk>",
+        "<int:pk>",
         views.CategoryviewSet.as_view(
             {
                 "get": "retrieve",
@@ -22,7 +22,7 @@ urlpatterns = [
         ),
     ),
     path(
-        "/<int:pk>/posts/",
+        "<int:pk>/posts/",
         views.CategoryviewSet.as_view(
             {
                 "get": "get_posts_by_category",
