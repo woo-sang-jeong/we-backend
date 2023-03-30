@@ -27,8 +27,8 @@ class Post(CommonModel):
     def __str__(self) -> str:
         return self.title
 
-    def like_count(post):
+    def like_count(self):
         return Post.p_like.count()
 
-    def dislike_count(post):
+    def dislike_count(self):
         return Post.p_dislike.comment.count()

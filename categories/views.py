@@ -12,8 +12,10 @@ class CategoryviewSet(ModelViewSet):
     def get_posts_by_category(self, request, pk):
         category = self.get_object()
         posts = category.posts.all()
+        author = category.users.all()
         serializer = PostListSerializer(
             posts,
+            author,
             many=True,
             context={"request": request},
         )

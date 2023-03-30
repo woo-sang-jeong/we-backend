@@ -14,8 +14,6 @@ class PostDetailSerializer(serializers.ModelSerializer):
     category = CategorySerializer(
         read_only=True,
     )
-    # p_like = serializers.SerializerMethodField()
-    # p_dislike = serializers.SerializerMethodField()
     photos = PhotoSerializer(many=True, read_only=True)
 
     class Meta:
@@ -36,7 +34,7 @@ class PostDetailSerializer(serializers.ModelSerializer):
 
 class PostListSerializer(serializers.ModelSerializer):
 
-    # p_like = serializers.SerializerMethodField()
+    owner = serializers.ReadOnlyField(source="owner.username")
     is_owner = serializers.SerializerMethodField()
     photos = PhotoSerializer(many=True, read_only=True)
     category = CategorySerializer(
@@ -51,6 +49,7 @@ class PostListSerializer(serializers.ModelSerializer):
             "title",
             "p_like",
             "p_dislike",
+            "owner",
             "is_owner",
             "photos",
         )
